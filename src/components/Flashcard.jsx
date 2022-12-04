@@ -1,18 +1,25 @@
 import styled from "styled-components";
 import Icones from "./Icones";
 import { useState } from "react";
+import cards from "./Cards";
 
-function CardPergunta({ question }) {
+function CardPergunta({ question, answer }) {
+  const [virarCarta, setVirarCarta] = useState(false);
+
   return (
     <PerguntaAberta>
-      <>{question}</>
-      <Icones type="virar" />
+      <>{!virarCarta ? question : answer}</>
+      <div onClick={() => setVirarCarta(true)}>
+        <Icones type="virar" />
+      </div>
     </PerguntaAberta>
   );
 }
 
-export default function Flashcard({ index, question }) {
-  const [Clicado, setClicado] = useState(false);
+export default function Flashcard({ index, question, virado, answer }) {
+  const [Clicado, setClicado] = useState(virado);
+
+  console.log(index, question, virado);
 
   return (
     <>
@@ -22,7 +29,7 @@ export default function Flashcard({ index, question }) {
           <Icones type="play" />
         </PerguntaFechada>
       ) : (
-        <CardPergunta question={question} />
+        <CardPergunta question={question} answer={answer} />
       )}
     </>
   );
