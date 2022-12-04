@@ -1,15 +1,19 @@
 import styled from "styled-components";
 
-export default function Footer() {
-  return <FooterContainer>Concluidos 1/1</FooterContainer>;
+export default function Footer({ children, questions, respondidos }) {
+  return (
+    <FooterContainer>
+      {respondidos.length} / {questions.length} Concluídos
+    </FooterContainer>
+  );
 }
-
 const FooterContainer = styled.div`
   width: 100%;
   min-height: 50px;
   background-color: #ffffff;
   position: fixed;
   bottom: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;

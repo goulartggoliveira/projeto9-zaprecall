@@ -1,13 +1,7 @@
-import styled from "styled-components";
-import cards from "./Cards.jsx";
 import Flashcard from "./Flashcard";
+import Footer from "./Footer.jsx";
 
-const questions = cards.map((value) => ({
-  ...value,
-  virado: false,
-}));
-
-export default function Flashcards(props) {
+export default function Flashcards({ questions, zapCard, respondidos }) {
   return (
     <div>
       {questions.map((value, index) => (
@@ -17,8 +11,10 @@ export default function Flashcards(props) {
           question={value.question}
           virado={value.virado}
           answer={value.answer}
+          zapCard={zapCard}
         />
       ))}
+      <Footer questions={questions} respondidos={respondidos} />
     </div>
   );
 }

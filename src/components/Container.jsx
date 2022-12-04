@@ -2,32 +2,27 @@ import Flashcards from "./Flashcards";
 import Footer from "./Footer";
 import Logo from "./Logo";
 import styled from "styled-components";
+import cards from "./Cards";
+import { useState } from "react";
+const questions = cards.map((value) => ({
+  ...value,
+  virado: false,
+}));
 
 export default function Container() {
+  const [respondidos, setRespondidos] = useState([]);
+  function zapCard(status) {
+    console.log("chamou");
+    setRespondidos([...respondidos, status]);
+  }
   return (
     <div>
       <Logo />
-      <Flashcards />
-
-      <FooterContainer>Concluidos 1/1</FooterContainer>
+      <Flashcards
+        zapCard={zapCard}
+        questions={questions}
+        respondidos={respondidos}
+      />
     </div>
   );
 }
-
-const FooterContainer = styled.div`
-  width: 100%;
-  min-height: 50px;
-  background-color: #ffffff;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: "Recursive";
-  font-weight: 400;
-  font-size: 18px;
-  color: #333333;
-  padding: 10px;
-`;

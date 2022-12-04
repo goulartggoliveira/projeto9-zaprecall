@@ -30,7 +30,7 @@
   margin-left: 20px;
 } */
 
-.footer-concluidos {
+/* .footer-concluidos {
   width: 100%;
   min-height: 50px;
   background-color: #ffffff;
@@ -52,7 +52,7 @@
   width: 80%;
   justify-content: space-between;
   margin: 20px;
-}
+} */
 
 /* Você vai precisar trocar a cor dos botões e alguns textos!
   VERDE = "#2FBE34"
@@ -61,7 +61,7 @@
   CINZA = "#333333" 
 */
 
-.container-botoes > button {
+/* .container-botoes > button {
   width: 90px;
   font-family: "Recursive";
   font-style: normal;
@@ -77,7 +77,7 @@
   border-radius: 5px;
   border: 1px solid blue;
   padding: 5px;
-}
+} */
 
 /* .pergunta-fechada {
   width: 300px;
