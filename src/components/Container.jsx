@@ -1,18 +1,34 @@
 import Flashcards from "./Flashcards";
-import Footer from "./Footer";
 import Logo from "./Logo";
-import styled from "styled-components";
 import cards from "./Cards";
 import { useState } from "react";
-const questions = cards.map((value) => ({
+
+let questionsData = cards.map((value) => ({
   ...value,
   virado: false,
 }));
 
 export default function Container() {
+  const [questions, setQuestions] = useState(questionsData);
+  function cardVirado(cardIndex) {
+    const newQuestions = questions.map((value, index) => {
+      if (index === cardIndex) {
+        return {
+          ...value,
+          virado: true,
+        };
+      }
+      return {
+        ...value,
+        virado: false,
+      };
+    });
+    setQuestions([...newQuestions]);
+  }
+
   const [respondidos, setRespondidos] = useState([]);
-  function zapCard(status) {
-    console.log("chamou");
+  function zapCard(index, status) {
+    console.log("chamou", index);
     setRespondidos([...respondidos, status]);
   }
   return (
@@ -22,6 +38,7 @@ export default function Container() {
         zapCard={zapCard}
         questions={questions}
         respondidos={respondidos}
+        cardVirado={cardVirado}
       />
     </div>
   );

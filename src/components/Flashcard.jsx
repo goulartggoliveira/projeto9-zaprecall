@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import Icones from "./Icones";
 import { useState } from "react";
-import cards from "./Cards";
 
-function CardPergunta({ question, answer, index, erro, zapCard }) {
+function CardPergunta({ question, answer, index, zapCard }) {
   const [virarCarta, setVirarCarta] = useState(false);
 
   return (
@@ -15,14 +14,39 @@ function CardPergunta({ question, answer, index, erro, zapCard }) {
         </div>
       ) : (
         <ContainerBotoes>
-          <BotoesDoContainer onClick={() => zapCard("erro")}>
+          <BotoesDoContainer
+            style={{ background: "#FF3030" }}
+            onClick={() => zapCard(index, "erro")}
+          >
             Não lembrei
           </BotoesDoContainer>
-          <BotoesDoContainer>Qause lembrei</BotoesDoContainer>
-          <BotoesDoContainer>Zap!</BotoesDoContainer>
+          <BotoesDoContainer
+            style={{ background: "#FF922E" }}
+            onClick={() => zapCard(index, "quase")}
+          >
+            Quase lembrei
+          </BotoesDoContainer>
+          <BotoesDoContainer
+            style={{ background: "#2FBE34" }}
+            onClick={() => zapCard(index, "certo")}
+          >
+            Zap!
+          </BotoesDoContainer>
         </ContainerBotoes>
       )}
     </PerguntaAberta>
+  );
+}
+
+function Card({ setClicado, index, cardVirado }) {
+  const [resolved, setResolved] = useState(true);
+  return (
+    <>
+      <PerguntaFechada onClick={() => cardVirado(index)}>
+        <p>{`Pergunta ${index + 1}`}</p>
+        <Icones type="play" />
+      </PerguntaFechada>
+    </>
   );
 }
 
@@ -32,18 +56,21 @@ export default function Flashcard({
   virado,
   answer,
   zapCard,
+  cardVirado,
 }) {
   const [Clicado, setClicado] = useState(virado);
 
   return (
     <>
-      {!Clicado ? (
-        <PerguntaFechada onClick={() => setClicado(true)}>
-          <p>{`Pergunta ${index + 1}`}</p>
-          <Icones type="play" />
-        </PerguntaFechada>
+      {!virado ? (
+        <Card index={index} setClicado={setClicado} cardVirado={cardVirado} />
       ) : (
-        <CardPergunta question={question} answer={answer} zapCard={zapCard} />
+        <CardPergunta
+          question={question}
+          answer={answer}
+          zapCard={zapCard}
+          index={index}
+        />
       )}
     </>
   );
@@ -111,9 +138,8 @@ const BotoesDoContainer = styled.button`
   justify-content: center;
   text-align: center;
   color: #ffffff;
-  background: blue;
   border-radius: 5px;
-  border: 1px solid blue;
+  border: 1px solid;
   padding: 5px;
   cursor: pointer;
 `;
