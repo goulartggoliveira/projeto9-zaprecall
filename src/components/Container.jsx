@@ -1,4 +1,4 @@
-import Flashcard from "./Flashcard";
+import Flashcards from "./Flashcards";
 import Footer from "./Footer";
 import Logo from "./Logo";
 import styled from "styled-components";
@@ -7,9 +7,7 @@ export default function Container() {
   return (
     <div>
       <Logo />
-      <Flashcard />
-      <Flashcard />
-      <Flashcard />
+      <Flashcards />
 
       <FooterContainer>Concluidos 1/1</FooterContainer>
     </div>
