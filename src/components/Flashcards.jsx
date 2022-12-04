@@ -7,7 +7,7 @@ export default function Flashcards(props) {
   return (
     <div>
       {cards.map((value, index) => (
-        <Flashcard key={index} index={index} />
+        <Flashcard key={index} index={index} question={value.question} />
       ))}
     </div>
   );
